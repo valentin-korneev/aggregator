@@ -1,0 +1,12 @@
+{
+    "author": "Valentin P Korneev",
+    "errors": {
+        "auth": {
+            "compromised_credential": "Could not validate credentials",
+            "not_authenticated": "Not authenticated",
+            "forbidden": "Not enough permissions",
+            "inactive": "Inactive user",
+            "invalid_credentials": "Incorrect username or password"
+        }
+    }
+}
