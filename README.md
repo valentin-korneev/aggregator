@@ -29,3 +29,5 @@ docker run -d --name aggregator_container -p 80:80 -p 5432:5432 aggregator_image
 # Работа с docker-compose
 docker-compose build
 docker-compose up -d
+
+# После выполнения можно запустить инициализацию БД

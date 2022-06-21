@@ -14,5 +14,5 @@
 \i ./database/acl_assignment_vie.sql
 \i ./database/acl_assignment_trg.sql
 
-\i ./database/acl_tokens_tbl.sql
+\i ./database/acl_token_tbl.sql
 \i ./database/acl_log_tbl.sql

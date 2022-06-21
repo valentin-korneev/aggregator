@@ -1,6 +1,7 @@
 from pydantic import BaseSettings, root_validator, SecretStr
 from app.core.configs.basic import BasicConfig
 from cryptography.fernet import Fernet
+from os import getenv
 
 
 class DatabaseConfig(BaseSettings):
@@ -33,7 +34,7 @@ class DatabaseConfig(BaseSettings):
             values['SCHEME'],
             values['USERNAME'],
             Fernet(key).decrypt(str.encode(values['PASSWORD'].get_secret_value())).decode('utf-8'),
-            values['HOST'],
+            getenv('DATABASE_HOST', values['HOST']),
             values['PORT'],
             values['DBNAME']
         )
