@@ -1,5 +1,5 @@
 from pydantic import BaseSettings, SecretStr
-from core.configs.basic import BasicConfig
+from app.core.configs.basic import BasicConfig
 from passlib.context import CryptContext
 
 

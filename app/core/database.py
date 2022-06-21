@@ -1,6 +1,6 @@
 from databases import Database
 from databases import Database
-from core.config import config
+from app.core.config import config
 
 
 connection = Database(

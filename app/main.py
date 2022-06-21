@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from starlette.middleware.base import BaseHTTPMiddleware
-from core.database import shutdown, startup
-from core.enums.environment import EnvironmentState
-from core.middleware import languageHeaderMiddleware, processTimeHeaderMiddleware, setRequestTimeMiddleware, setUserMiddleware
-from api import tokens, users
-from core.config import config, logger
+from app.core.database import shutdown, startup
+from app.core.enums.environment import EnvironmentState
+from app.core.middleware import languageHeaderMiddleware, processTimeHeaderMiddleware, setRequestTimeMiddleware, setUserMiddleware
+from app.api import tokens, users
+from app.core.config import config, logger
 
 
-app = FastAPI()
+app = FastAPI(title=config.application.NAME)
 
 app.add_middleware(BaseHTTPMiddleware, dispatch=setUserMiddleware)
 app.add_middleware(BaseHTTPMiddleware, dispatch=languageHeaderMiddleware)

@@ -1,6 +1,6 @@
 from pydantic import BaseSettings
-from core.configs.basic import BasicConfig
-from core.enums.environment import EnvironmentState
+from app.core.configs.basic import BasicConfig
+from app.core.enums.environment import EnvironmentState
 
 
 class EnvironmentConfig(BaseSettings):

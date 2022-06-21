@@ -4,7 +4,7 @@ create table if not exists acl_role_member               -- Вхождение �
 , primary key (role_id, member_role_id)
 );
 
-create index if not exists on acl_role_member(role_id);
-create index if not exists on acl_role_member(member_role_id);
+create index if not exists acl_role_member_role_id_idx on acl_role_member(role_id);
+create index if not exists acl_role_member_member_role_id_idx on acl_role_member(member_role_id);
 
 call create_history('acl_role_member');

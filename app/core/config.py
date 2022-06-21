@@ -1,5 +1,5 @@
 from logging import getLogger
-from core.configs.general import GeneralConfig
+from app.core.configs.general import GeneralConfig
 
 
 config = GeneralConfig()

@@ -6,7 +6,8 @@
             "not_authenticated": "Not authenticated",
             "forbidden": "Not enough permissions",
             "inactive": "Inactive user",
-            "invalid_credentials": "Incorrect username or password"
+            "invalid_credentials": "Incorrect username or password",
+            "invalid_token": "Invalid token"
         }
     }
 }

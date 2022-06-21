@@ -1,11 +1,11 @@
 
 from fastapi import Request, Depends
 from fastapi.security import SecurityScopes
-from core.constants import BEARER
-from core.security import ForbiddenException, OAuth2PasswordBearer
-from core.schemas.users import User
-from core.services.users import check_assignment
-from utils.localization import _
+from app.core.constants import BEARER
+from app.core.security import ForbiddenException, OAuth2PasswordBearer
+from app.core.schemas.users import User
+from app.core.services.users import check_assignment
+from app.utils.localization import _
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/token', refreshUrl='/token/refresh', scopes={'scope': 'description'})

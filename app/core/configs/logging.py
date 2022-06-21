@@ -1,9 +1,9 @@
 from pydantic import BaseSettings, root_validator
 from logging import Formatter, basicConfig, getLogger, DEBUG, INFO
-from core.configs.application import ApplicationConfig
-from core.configs.basic import BasicConfig
-from core.enums.environment import EnvironmentState
-from utils.rotating import RotatingFileHandler
+from app.core.configs.application import ApplicationConfig
+from app.core.configs.basic import BasicConfig
+from app.core.enums.environment import EnvironmentState
+from app.utils.rotating import RotatingFileHandler
 
 
 class LogggingConfig(BaseSettings):
@@ -33,7 +33,7 @@ class LogggingConfig(BaseSettings):
             encoding='utf-8', maxBytes=self.FILE_MAX_SIZE
         )
         handler.setFormatter(Formatter(self.FORMAT))
-        from core.config import config
+        from app.core.config import config
         handler.setLevel(DEBUG if config.environment.STATE == EnvironmentState.DEVELOPMENT else INFO)
         for logger in self.LOGGERS:
             getLogger(logger).addHandler(handler)

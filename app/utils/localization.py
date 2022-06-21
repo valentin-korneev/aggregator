@@ -1,5 +1,5 @@
 from urllib.request import Request
-from core.config import config
+from app.core.config import config
 
 
 def getValueByKey(dic: dict, path: str):

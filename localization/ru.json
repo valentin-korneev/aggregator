@@ -6,7 +6,8 @@
             "not_authenticated": "Не аутентифицирован",
             "forbidden": "Недостаточно прав",
             "inactive": "Пользователь заблокирован",
-            "invalid_credentials": "Неверный логин или пароль"
+            "invalid_credentials": "Неверный логин или пароль",
+            "invalid_token": "Неверный токен"
         }
     }
 }

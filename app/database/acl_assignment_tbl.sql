@@ -4,7 +4,7 @@ create table if not exists acl_assignment                      -- Выданны
 , primary key (role_id, permission_id)
 );
 
-create index if not exists on acl_assignment(role_id);
-create index if not exists on acl_assignment(permission_id);
+create index if not exists acl_assignment_role_id_idx on acl_assignment(role_id);
+create index if not exists acl_assignmenton_permission_id_idx acl_assignment(permission_id);
 
 call create_history('acl_assignment');

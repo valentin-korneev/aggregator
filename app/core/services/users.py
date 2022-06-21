@@ -1,8 +1,8 @@
 from typing import List
 from fastapi import Request, Response
-from core.schemas.users import User
-from core.database import connection
-from core.security import parseJWT
+from app.core.schemas.users import User
+from app.core.database import connection
+from app.core.security import parseJWT
 
 
 async def get_user(username: str) -> User:
@@ -13,7 +13,6 @@ async def get_user(username: str) -> User:
 
 async def get_user_from_token(req: Request, token: str) -> User:
     token_data = parseJWT(req, token)
-    print(token_data)
     return await get_user(username=token_data.user.username)
 
 
@@ -27,8 +26,8 @@ async def check_assignment(user_id: int, scopes: List[str]) -> bool:
 
 
 async def log_request(req: Request, resp: Response):
-    print(req.state.request_time)
+    id = req.state.user.id if req.state.user else 1 # 1 - public user (not authorized)
     await connection.execute(
         query='insert into acl_log(role_id, uri_path, request_time, status_code) values (:role_id, :uri_path, :request_time, :status_code)',
-        values={'role_id': req.state.user.id, 'uri_path': req.scope['path'], 'request_time': req.state.request_time, 'status_code': resp.status_code}
+        values={'role_id': id, 'uri_path': req.scope['path'], 'request_time': req.state.request_time, 'status_code': resp.status_code}
         )

@@ -2,11 +2,12 @@ from datetime import datetime
 from fastapi import Request, Response, status
 from fastapi.responses import JSONResponse
 from time import time, mktime
-from core.config import config
+from app.core.config import config
 from fastapi.security.utils import get_authorization_scheme_param
-from core.constants import BEARER
-from core.services.users import get_user_from_token, log_request
-from utils.localization import _
+from app.core.constants import BEARER
+from app.core.services.tokens import isNotActiveToken
+from app.core.services.users import get_user_from_token, log_request
+from app.utils.localization import _
 
 
 async def setRequestTimeMiddleware(req: Request, call_next) -> Response:
@@ -34,11 +35,12 @@ async def setUserMiddleware(req: Request, call_next) -> Response:
     if not authorization or scheme.lower() != BEARER.lower() or req.scope['path'].split('/')[-2:] == ['token', 'refresh']:
         req.state.user = None
     else:
+        if await isNotActiveToken(param):
+            return JSONResponse(content={'detail': _(req, 'errors.auth.invalid_token')}, status_code=status.HTTP_401_UNAUTHORIZED, headers={'WWW-Authenticate': BEARER})
         req.state.user = await get_user_from_token(req, param)
         if req.state.user is None:
             return JSONResponse(content={'detail': _(req, 'errors.auth.compromised_credential')}, status_code=status.HTTP_401_UNAUTHORIZED, headers={'WWW-Authenticate': BEARER})
             
     resp = await call_next(req)
-    if req.state.user is not None:
-        await log_request(req, resp)
+    await log_request(req, resp)
     return resp

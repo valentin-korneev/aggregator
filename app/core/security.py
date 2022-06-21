@@ -1,11 +1,11 @@
 from datetime import datetime, timedelta
 from fastapi import HTTPException, status, Request
 from pydantic import ValidationError
-from core.config import config
+from app.core.config import config
 from jose import JWTError, jwt
-from core.constants import BEARER
-from utils.localization import _
-from core.schemas.tokens import TokenUser, TokenData
+from app.core.constants import BEARER
+from app.utils.localization import _
+from app.core.schemas.tokens import TokenUser, TokenData
 from fastapi.security.oauth2 import OAuth2
 from fastapi.openapi.models import OAuthFlows as OAuthFlowsModel
 from typing import Optional, Dict, Any
@@ -21,7 +21,7 @@ class CredentialException(HTTPException):
         super().__init__(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=detail,
-            headers={'WWW-Authenticate': authenticate_value}
+            headers={'WWW-Authenticate': authenticate_value} if authenticate_value else dict()
         )
 
 

@@ -1,0 +1,8 @@
+version: '3.10.5'
+
+services:
+  server:
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0
+    ports:
+      - 80:8000

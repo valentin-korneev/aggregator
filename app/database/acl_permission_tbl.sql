@@ -6,5 +6,5 @@ create table if not exists acl_permission                      -- Допусти
 , seq_no      integer   not null default 0                     -- Порядок следования в дереве
 );
 
-create index if not exists on acl_permission(parent_id);
-create unique index if not exists on acl_permission(key, coalesce(parent_id, 0));
+create index if not exists acl_permission_parent_id_idx on acl_permission(parent_id);
+create unique index if not exists acl_permission_key_parent_id_idx on acl_permission(key, coalesce(parent_id, 0));

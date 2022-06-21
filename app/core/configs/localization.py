@@ -1,6 +1,6 @@
 from pydantic import BaseSettings, root_validator
 from json import load
-from core.configs.basic import BasicConfig
+from app.core.configs.basic import BasicConfig
 
 
 class LocalizationConfig(BaseSettings):
